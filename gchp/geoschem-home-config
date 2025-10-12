@@ -1,0 +1,2 @@
+export GC_DATA_ROOT=/fsx/s3/ExtData
+export GC_USER_REGISTERED=true
