@@ -30,22 +30,23 @@ if (( start_month < 1 || start_month > 12 )) || (( end_month < 1 || end_month > 
 fi
 
 # Paths (user-defined)
-extract_script="/home/ec2-user/analyze/util/extract.sh"
-pypath="/home/ec2-user/analyze/util/extract.py"
-lfs_hsm_util="/home/ec2-user/aws-gc-utils/pcluster/lfs_hsm_util.sh"
-extdata_root="/fsx/s3/ExtData/GEOS_C180/GEOS_IT"
+root_path="/fsx"
+extract_script="~/aws-gc-utils/gchp/extracts/extract.sh"
+pypath="~/aws-gc-utils/gchp/extracts/extract.py"
+lfs_hsm_util="~/aws-gc-utils/pcluster/lfs_hsm_util.sh"
+extdata_root="$root_path/ExtData/GEOS_C180/GEOS_IT"
 
 experiment="longterm_v2"
-rundir="/fsx/rundir/gchp_c180_mf_cSOA_sPOA_GFASnoscaling_${year}_amd"
+rundir="$root_path/rundir/gchp_c180_mf_cSOA_sPOA_GFASnoscaling_${year}_amd"
 checkpoint_dir="${rundir}/Restarts"
 
 # Extract script directory
 indir="${rundir}/OutputDir"
-outdir="/fsx/s3/analyze/extracts/${experiment}/${year}"
-archivedir="/fsx/s3/OutputDir/${experiment}/${year}" # This is a sudo directory
+outdir="$root_path/s3/analyze/extracts/${experiment}/${year}"
+archivedir="$root_path/s3/OutputDir/${experiment}/${year}"
 
 # ------------------ LOGGING SETUP ---------------------------
-LOGDIR="/home/ec2-user/logs"
+LOGDIR="~/logs"
 STATUS_LOGDIR="$LOGDIR/lfs_hsm_status_log"
 mkdir -p "$LOGDIR" "$STATUS_LOGDIR"
 MASTER_LOG="$LOGDIR/monthly_extract_master_${year}.log"
@@ -84,7 +85,7 @@ get_next_month() {
 # ------------------------------------------------------------
 for (( m=$start_month; m<=$end_month; m++ )); do
     month=$(printf "%02d" $m)
-    sudo mkdir -p "$archivedir/$month"
+    mkdir -p "$archivedir/$month"
 
     read next_year next_month < <(get_next_month "$year" "$month" 1)
     read next2_year month2    < <(get_next_month "$year" "$month" 2)
@@ -144,10 +145,9 @@ for (( m=$start_month; m<=$end_month; m++ )); do
                     tail -n 4 "$status_log" | tee -a "$MASTER_LOG"
                 fi
 
-                # Be a bit more tolerant on match text
-                if grep -qE "files \(100%\).*(exists archived|archived exists).*archive_id:1" "$status_log"; then
+                if grep -q "(100%) - (0x00000009) exists archived, archive_id:1" "$status_log"; then
                     log "Archive fully complete — releasing $archivedir/$month"
-                    sudo "$lfs_hsm_util" -o release "$archivedir/$month" >> "$MASTER_LOG" 2>&1
+                    "$lfs_hsm_util" -o release "$archivedir/$month" >> "$MASTER_LOG" 2>&1
                     break
                 else
                     log "Archive not complete, waiting 10 more minutes..."
