@@ -25,5 +25,5 @@ biovoc="$root_path/s3/ExtData/HEMCO/OFFLINE_BIOVOC/v2025-04/0.5x0.625/GEOSIT/$YE
 seasalt="$root_path/s3/ExtData/HEMCO/OFFLINE_SEASALT/v2025-04/0.5x0.625/GEOSIT/$YEAR"
 soilnox="$root_path/s3/ExtData/HEMCO/OFFLINE_SOILNOX/v2025-04/0.5x0.625/GEOSIT/$YEAR"
 
-~/aws-gc-utils/pcluster/lfs_hsm_util.sh -o "$OPERATION"  "$biovoc" "$seasalt" "$soilnox" "$dust"
+$HOME/aws-gc-utils/pcluster/lfs_hsm_util.sh -o "$OPERATION"  "$biovoc" "$seasalt" "$soilnox" "$dust"
 

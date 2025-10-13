@@ -31,9 +31,9 @@ fi
 
 # Paths (user-defined)
 root_path="/fsx"
-extract_script="~/aws-gc-utils/gchp/extracts/extract.sh"
-pypath="~/aws-gc-utils/gchp/extracts/extract.py"
-lfs_hsm_util="~/aws-gc-utils/pcluster/lfs_hsm_util.sh"
+extract_script="$HOME/aws-gc-utils/gchp/extracts/extract.sh"
+pypath="$HOME/aws-gc-utils/gchp/extracts/extract.py"
+lfs_hsm_util="$HOME/aws-gc-utils/pcluster/lfs_hsm_util.sh"
 extdata_root="$root_path/ExtData/GEOS_C180/GEOS_IT"
 
 experiment="longterm_v2"
@@ -46,7 +46,7 @@ outdir="$root_path/s3/analyze/extracts/${experiment}/${year}"
 archivedir="$root_path/s3/OutputDir/${experiment}/${year}"
 
 # ------------------ LOGGING SETUP ---------------------------
-LOGDIR="~/logs"
+LOGDIR="$HOME/logs"
 STATUS_LOGDIR="$LOGDIR/lfs_hsm_status_log"
 mkdir -p "$LOGDIR" "$STATUS_LOGDIR"
 MASTER_LOG="$LOGDIR/monthly_extract_master_${year}.log"
