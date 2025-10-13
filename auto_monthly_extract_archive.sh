@@ -34,7 +34,7 @@ root_path="/fsx"
 extract_script="$HOME/aws-gc-utils/gchp/extracts/extract.sh"
 pypath="$HOME/aws-gc-utils/gchp/extracts/extract.py"
 lfs_hsm_util="$HOME/aws-gc-utils/pcluster/lfs_hsm_util.sh"
-extdata_root="$root_path/ExtData/GEOS_C180/GEOS_IT"
+extdata_root="$root_path/s3/ExtData/GEOS_C180/GEOS_IT"
 
 experiment="longterm_v2"
 rundir="$root_path/rundir/gchp_c180_mf_cSOA_sPOA_GFASnoscaling_${year}_amd"
