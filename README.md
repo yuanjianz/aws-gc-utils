@@ -1,2 +1,2 @@
 # aws-gc-utils
-Utils and configurations for geos-chem on AWS parallel-cluster
+Utils and configurations for geos-chem (GCHP) on AWS parallel-cluster
