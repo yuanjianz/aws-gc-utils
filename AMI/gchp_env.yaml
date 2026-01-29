@@ -1,0 +1,43 @@
+# This is a Spack Environment file.
+#
+# It describes a set of packages to be installed, along with
+# configuration settings.
+spack:
+  # add package specs to the `specs` list
+  specs:
+  - cmake@3.30.5 ~ncurses
+  - openmpi@4.1.7
+  - hdf5@1.14.3 +fortran+hl ^openmpi@4.1.7
+  - netcdf-c@4.9.2
+  - netcdf-fortran@4.6.1
+  - esmf@8.4.2 +mpi esmf_comm=openmpi ^openmpi@4.1.7
+
+  view: true
+
+  concretizer:
+    unify: true
+    targets:
+      granularity: generic  # tell Spack to avoid CPU-specific tuning
+
+  compilers:
+  - compiler:
+      spec: gcc@=11.5.0
+      paths:
+        cc: /usr/bin/gcc
+        cxx: /usr/bin/g++
+        f77: /usr/bin/gfortran
+        fc: /usr/bin/gfortran
+      flags: {}
+      operating_system: amzn2023
+      target: x86_64    # force generic x86_64 target
+      modules: []
+      environment: {}
+      extra_rpaths: []
+
+  packages:
+    openmpi:
+      externals:
+      - spec: openmpi@4.1.7
+        modules:
+        - openmpi/4.1.7
+      buildable: false
