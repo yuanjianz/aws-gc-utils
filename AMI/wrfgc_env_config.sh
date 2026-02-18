@@ -1,6 +1,6 @@
 #!/bin/bash
 # --------------------------------------------------------------------
-# GEOS-Chem Environment Setup Script
+# WRF-GC Environment Setup Script
 # --------------------------------------------------------------------
 
 set -euo pipefail
