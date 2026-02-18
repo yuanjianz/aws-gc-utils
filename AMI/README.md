@@ -32,7 +32,7 @@ spack install
 4. Prepare env file for WRFGC
 ```bash
 sudo bash jasper_install.sh
-sudo bash wrfgc_env_configl.sh
+sudo bash wrfgc_env_config.sh
 ```
 
 # Usage
