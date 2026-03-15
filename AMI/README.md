@@ -2,10 +2,11 @@
 See reference in https://docs.aws.amazon.com/parallelcluster/latest/ug/building-custom-ami-v3.html
 
 # Steps to create a GCHP/WRFGC AMI
-1. Follow the reference above and log onto an EC2 instance with base ParallelCluster AMI
+1. Follow the reference above and log onto an EC2 instance with a base ParallelCluster AMI like `aws-parallelcluster-3.13.0-amzn2023-hvm-x86_64-xxxx`. Note that the base AMI depends on your ParallelCluster version, operating system, hardware architecture. You can find the base AMI in Amazon Community AMIs.
 2. Use `postinstall.sh` to install spack
 ```bash
-sudo bash postinstall.sh --prefix /opt
+wget https://raw.githubusercontent.com/spack/spack-configs/refs/heads/main/AWS/parallelcluster/postinstall.sh
+sudo bash postinstall.sh --prefix /opt --no-intel-compiler --no-arm-compiler
 ```
 track installation progress in `/var/log/spack-postinstall.log`
 ```bash

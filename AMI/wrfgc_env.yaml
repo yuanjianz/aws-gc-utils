@@ -20,14 +20,14 @@ spack:
 
   compilers:
   - compiler:
-      spec: gcc@=11.5.0
+      spec: gcc@=11.5.0 # depends on the version of gcc available in your system
       paths:
         cc: /usr/bin/gcc
         cxx: /usr/bin/g++
         f77: /usr/bin/gfortran
         fc: /usr/bin/gfortran
       flags: {}
-      operating_system: amzn2023
+      operating_system: amzn2023 # your system os
       target: x86_64 # force generic x86_64 target
       modules: []
       environment: {}
@@ -36,7 +36,7 @@ spack:
   packages:
     openmpi:
       externals:
-      - spec: openmpi@4.1.7
+      - spec: openmpi@4.1.7 # depends on the version of openmpi available in your system
         modules:
         - openmpi/4.1.7
       buildable: false

@@ -6,10 +6,12 @@ spack:
   # add package specs to the `specs` list
   specs:
   - cmake@3.30.5 ~ncurses
+  - udunits@2.2.28 # udunits2 is for GCHP above v14.7.0
   - openmpi@4.1.7
   - hdf5@1.14.3 +fortran+hl ^openmpi@4.1.7
   - netcdf-c@4.9.2
   - netcdf-fortran@4.6.1
+  # Change ESMF version to 8.6.1 for GCHP above v14.7.0
   - esmf@8.4.2 +mpi esmf_comm=openmpi ^openmpi@4.1.7
 
   view: true
@@ -21,14 +23,14 @@ spack:
 
   compilers:
   - compiler:
-      spec: gcc@=11.5.0
+      spec: gcc@=11.5.0 # depends on the version of gcc available in your system
       paths:
         cc: /usr/bin/gcc
         cxx: /usr/bin/g++
         f77: /usr/bin/gfortran
         fc: /usr/bin/gfortran
       flags: {}
-      operating_system: amzn2023
+      operating_system: amzn2023 # your system os
       target: x86_64    # force generic x86_64 target
       modules: []
       environment: {}
@@ -37,7 +39,7 @@ spack:
   packages:
     openmpi:
       externals:
-      - spec: openmpi@4.1.7
+      - spec: openmpi@4.1.7 # depends on the version of openmpi available in your system
         modules:
         - openmpi/4.1.7
       buildable: false
